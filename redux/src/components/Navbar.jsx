@@ -19,7 +19,7 @@ const Navbars = () => {
           navbarScroll
         >
           <Nav.Link href="#">
-            <Link to="/">Products</Link>
+            <Link to="/products">Products</Link>
           </Nav.Link>
         </Nav>
         <Navbar.Collapse className="">
