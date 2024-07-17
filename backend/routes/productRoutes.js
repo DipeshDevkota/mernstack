@@ -1,19 +1,17 @@
 const express = require("express");
-
-const validateToken = require("../middlewares/validateTokenHandler");
-
 const { getallproducts, getproductById, addProduct, deleteProduct } = require("../controllers/productController");
+// const validateToken = require("../middlewares/validateTokenHandler");
 
-const router=express.Router();
-router.use(validateToken);
+const router = express.Router();
+
+// router.use(validateToken);
+
 router.route("/products")
-.get(getallproducts)
-.post(addProduct);
+    .get(getallproducts)
+    .post(addProduct);
 
+router.route("/products/:id")
+    .get(getproductById)
+    .delete(deleteProduct);
 
-router.route("/product/:id")
-.get(getproductById)
-.delete(deleteProduct);
-
-
-module.exports= router;
+module.exports = router;

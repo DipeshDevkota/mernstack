@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
 // Register a new user
-export const registerUser = asyncHandler(async (req, res) => {
+const registerUser = asyncHandler(async (req, res) => {
     const { name, email, password } = req.body;
 
     const userExists = await User.findOne({ email });
@@ -34,7 +34,8 @@ export const registerUser = asyncHandler(async (req, res) => {
     }
 });
 
-export const loginUser = asyncHandler(async(req,res)=>{
+// Login a user
+const loginUser = asyncHandler(async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
@@ -51,3 +52,8 @@ export const loginUser = asyncHandler(async(req,res)=>{
         throw new Error('Invalid email or password');
     }
 });
+
+module.exports = {
+    registerUser,
+    loginUser,
+};

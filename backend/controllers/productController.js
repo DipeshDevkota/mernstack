@@ -1,14 +1,14 @@
-import asynchandler from "express-async-handler";
-import Product from "../models/productModel";
+const asyncHandler = require("express-async-handler");
+const Product = require("../models/productModel");
 
 // Get all products
-export const getallproducts = asynchandler(async (req, res) => {
+const getallproducts = asyncHandler(async (req, res) => {
     const products = await Product.find();
     res.status(200).json(products);
 });
 
 // Get product by ID
-export const getproductById = asynchandler(async (req, res) => {
+const getproductById = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id);
 
@@ -20,7 +20,7 @@ export const getproductById = asynchandler(async (req, res) => {
 });
 
 // Add a new product
-export const addProduct = asynchandler(async (req, res) => {
+const addProduct = asyncHandler(async (req, res) => {
     const { name, category, price } = req.body;
 
     if (!name || !category || !price) {
@@ -39,7 +39,7 @@ export const addProduct = asynchandler(async (req, res) => {
 });
 
 // Delete a product
-export const deleteProduct = asynchandler(async (req, res) => {
+const deleteProduct = asyncHandler(async (req, res) => {
     const { id } = req.params;
     const product = await Product.findById(id);
 
@@ -51,3 +51,10 @@ export const deleteProduct = asynchandler(async (req, res) => {
     await product.remove();
     res.status(200).json({ message: "Product removed successfully" });
 });
+
+module.exports = {
+    getallproducts,
+    getproductById,
+    addProduct,
+    deleteProduct
+};
